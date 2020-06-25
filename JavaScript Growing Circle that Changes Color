@@ -1,0 +1,34 @@
+/* Constants */
+var START_RADIUS = 1;
+var INCREMENT = 1;
+var CHANGE_COLORS_AT = 10;
+var circle = new Circle(START_RADIUS);
+
+// Function where circle grows and changes color every 50 miliseconds
+function start(){
+    var centerX = getWidth()/2;
+    var centerY = getHeight()/2;
+    
+    circle.setPosition(centerX, centerY);
+    add(circle);
+    
+    setTimer(grow, 50);
+}
+
+/* Function where it allows the circle to grow in size and changes color 
+until max height
+*/
+function grow(){
+    var size = circle.getRadius();
+    size = size + INCREMENT;
+    circle.setRadius(size);
+    
+    if(size % CHANGE_COLORS_AT == INCREMENT){
+        var color = Randomizer.nextColor();
+        circle.setColor(color);
+    }
+    
+    if(size == getHeight()/2){
+        stopTimer(grow);
+    }
+}
